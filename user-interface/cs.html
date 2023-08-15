@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>Customer Service | DISHOP</title>
+
+    <style>
+        .chat,
+        .chat-user {
+            max-width: 60%;
+            height: min-content;
+            margin: 20px;
+        }
+
+        .chat-user {
+            justify-content: flex-end !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class=" navbar-brand fs-3" href="index.html">DISHOP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.html">Search Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cs.html">Customer Service</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Jumbotron Feature 1-->
+    <div class="p-5 mb-4 bg-dark text-white mt-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">AI Support</h1>
+            <p class="col-md-8 fs-4">With the help of AI, it can help you choose your favorite items
+                without worrying about risks based on the experiences of other users..</p>
+            <button class="btn btn-light btn-lg" type="button">Chat With Ai</button>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+
+    <!-- Chat App -->
+    <h1 class="display-5 fw-normal text-center">AI Support</h1>
+    <div class="container text-white w-75">
+        <div class="p-1" id="container-chat"
+            style="display: flex; flex-direction: column; background-color: whitesmoke; height: 400px; overflow-y: scroll;">
+            <div class="chat rounded-3 p-1 bg-primary">
+                <p>Hallo, I am AI Support. Can I Help You</p>
+            </div>
+        </div>
+        <div class="input-group mt-2">
+            <input type="text" class="form-control" name="search"
+                placeholder="what should i do when my kettle is leak ?" id="prompt" aria-label="Prompt Search"
+                aria-describedby="button-addon2" value="">
+            <button class="btn btn-outline-dark" type="button" id="chat-button">Chat</button>
+        </div>
+    </div>
+    <!-- Chat App -->
+
+    <!-- Footer -->
+    <div class="container">
+        <footer class="py-3 my-4">
+            <p class="text-center text-muted">&copy; 2023 By Diskrit Team</p>
+        </footer>
+    </div>
+    <!-- Footer -->
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+
+    <script>
+        const demo = false
+        const chatButton = document.querySelector('#chat-button')
+        const containerChat = document.querySelector('#container-chat')
+        const inputChat = document.querySelector('#prompt')
+        const classUserButton = ['chat', 'rounded-3 p-1', 'bg-secondary']
+        const classAIButton = ['chat', 'rounded-3 p-1', 'bg-primary']
+
+        const demoAnswer =
+            'Baik, Jika Kettle yang kamu punya bocor, kami bisa mengatur pengirimin unit pengganti kepada Anda'
+
+
+        inputChat.addEventListener('keydown', function (e) {
+            if (e.keyCode === 13) createPrompt()
+        })
+
+        chatButton.addEventListener('click', function (e) {
+            e.preventDefault()
+            createPrompt()
+        })
+
+        async function createPrompt() {
+            const prompt = inputChat.value
+            inputChat.value = ''
+            createChat(true, prompt)
+
+            const result = await fetchJSON('http://localhost:5000/query', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjEyMywidXNlcm5hbWUiOiJqb2huX2RvZSJ9LCJleHAiOjE3MjM2MTI0Nzl9.z4MBKlGw1H7P0j83_YNgWQE8wOhmCMnGn3HrL3xXDOM'
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    query: prompt
+                }),
+            })
+
+            if (demo) createChat(false, demoAnswer)
+            else createChat(false, result.answer)
+        }
+
+        function createChat(user, prompt) {
+            const div = document.createElement('div')
+            const p = document.createElement('p')
+            div.classList.add('chat', 'rounded-3', 'p-1')
+            p.innerText = prompt
+            if (user) div.classList.add('bg-secondary')
+            else div.classList.add('bg-primary')
+
+            div.appendChild(p)
+            containerChat.appendChild(div)
+            containerChat.scrollBy(0, containerChat.clientHeight)
+        }
+
+        async function fetchJSON(url, options = {}) {
+            try {
+                const response = await fetch(url, options)
+                if (!response.ok) {
+                    const data = await response.json()
+                    return alert(data.msg)
+                }
+                const data = await response.json()
+                return data
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    </script>
+
+</body>
+
+</html>

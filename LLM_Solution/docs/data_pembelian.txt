@@ -1,0 +1,25 @@
+Product: 55 inch LED Television Price: IDR 7500000
+Product: Mirrorless Camera Price: IDR 12000000
+Product: Android Smartphone Price: IDR 3500000
+Product: Book - The Power of Now Price: IDR 150000
+Product: Electric Mixer Price: IDR 500000
+Product: Gaming laptop Price: IDR 12000000
+Product: Elegant dress Price: IDR 800000
+Product: Microwave Oven Price: IDR 900000
+Product: Diamond Necklace Price: IDR 15000000
+Product: TV Soundbar Price: IDR 2500000
+Product: Book - 'The Alchemist' Price: IDR 150000
+Product: Casual Sneakers Price: IDR 800000
+Product: Electric Blender Price: IDR 400000
+Product: Smartwatch Price: IDR 2000000
+Product: Hair Dryer Price: IDR 250000
+Product: Wireless Earbuds Price: IDR 800000
+Product: Coffee Maker Price: IDR 600000
+Product: Headphones Price: IDR 1000000
+Product: External hard drive Price: IDR 900000
+Product: Sunglasses Price: IDR 400000
+Product: Electric Toothbrush Price: IDR 250000
+Product: Fitness Tracker Price: IDR 700000
+Product: Vacuum Cleaner Price: IDR 3000000
+Product: Air Purifier Price: IDR 1500000
+Product: Electric Kettle Price: IDR 400000
